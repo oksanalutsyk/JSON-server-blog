@@ -8,6 +8,7 @@ import {
 import { Post } from "../shared/interfaces/post.interface";
 import { PostService } from "../services/post.service";
 import { NewPost } from "../shared/classes/new-post.class";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-post-form",
@@ -15,6 +16,7 @@ import { NewPost } from "../shared/classes/new-post.class";
   styleUrls: ["./post-form.component.scss"],
 })
 export class PostFormComponent implements OnInit, OnChanges {
+  form: FormGroup;
   @Input() obj: Post;
   posts: Array<Post> = [];
   newPost: Post;
@@ -35,28 +37,50 @@ export class PostFormComponent implements OnInit, OnChanges {
       this.editPost();
     }
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.form = new FormGroup({
+      postTitle: new FormControl("", [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      postBody: new FormControl("", [
+        Validators.required,
+        Validators.minLength(10),
+      ]),
+    });
+  }
+  public submit(buttonType) {
+    const formData = { ...this.form.value };
+    this.postTitle = formData.postTitle;
+    this.postBody = formData.postBody;
 
-  public saveEditChanges(){
+    if (buttonType === "Add") {
+      this.isAddPost()
+    }
+    if (buttonType === "Edit") {
+      this.saveEditChanges()
+    }
+  }
+
+  public saveEditChanges() {
     const newPost: Post = new NewPost(
       this.editId,
       this.postTitle,
       this.postBody,
       this.postImg
     );
-    this.postTitle = null;
-    this.postBody = null;
     this.postService.editPost(newPost).subscribe(() => {
       this.getPosts();
-    })
+    });
     this.editStatus = false;
+    this.form.reset()
   }
 
   public editPost() {
     this.editStatus = true;
     this.postTitle = this.editObj.title;
-    this.postBody =  this.editObj.body;
-    this.editId = this.editObj.id
+    this.postBody = this.editObj.body;
+    this.editId = this.editObj.id;
   }
 
   public getPosts(): void {
@@ -79,8 +103,6 @@ export class PostFormComponent implements OnInit, OnChanges {
     );
     if (this.posts.length >= 1) {
       newPost.id = this.posts.slice(-1)[0].id + 1;
-      this.postTitle = "";
-      this.postBody = "";
       this.postService.addPost(newPost).subscribe(() => {
         this.getPosts();
       });
@@ -92,12 +114,10 @@ export class PostFormComponent implements OnInit, OnChanges {
         img: this.postImg,
       };
       this.posts.push(newPost);
-      this.postTitle = "";
-      this.postBody = "";
       this.postService.addPost(newPost).subscribe(() => {
         this.getPosts();
       });
-      console.log(newPost);
+      this.form.reset()
     }
   }
 }
