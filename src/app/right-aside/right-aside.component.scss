@@ -1,0 +1,15 @@
+@import "../../mixins/aside.mixin.scss";
+
+.aside {
+  @include asideSize;
+  .list {
+    padding: 30px;
+    .radios{
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+.radioLabel {
+  white-space: normal;
+}

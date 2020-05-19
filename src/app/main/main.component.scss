@@ -1,0 +1,15 @@
+//variables
+$display: flex;
+$jc: space-around;
+$flexWrap: wrap;
+$postBcg: ghostwhite;
+
+
+.posts {
+  display: $display;
+  justify-content: $jc;
+  flex-wrap: $flexWrap;
+  background-color: $postBcg;
+  min-height: 100vh;
+  align-items: stretch;
+}

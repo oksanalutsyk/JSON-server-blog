@@ -1,0 +1,13 @@
+@mixin postBlockView() {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 30px;
+  justify-content: space-around;
+  word-wrap: break-word;
+}
+@mixin postInfBlock() {
+  margin: 0 15px;
+  text-align: justify;
+  margin-bottom: 0
+}

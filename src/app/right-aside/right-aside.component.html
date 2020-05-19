@@ -1,0 +1,17 @@
+<aside [ngClass]="{ aside: true }">
+  <div [ngClass]="{ list: true }">
+    <button mat-stroked-button color="warn">Reset</button>
+    <mat-radio-group aria-label="Select an option" [ngClass]="{ radios: true }">
+      <mat-radio-button
+        *ngFor="let item of posts"
+        id="{{ item.id }}"
+        value="{{ item.id }}"
+        (click)="checkRadioButton($event)"
+      >
+        <label for="" [ngClass]="{ radioLabel: true }">{{
+          item.title
+        }}</label></mat-radio-button
+      >
+    </mat-radio-group>
+  </div>
+</aside>
