@@ -4,6 +4,20 @@ $jc: space-around;
 $flexWrap: wrap;
 $postBcg: ghostwhite;
 
+.container {
+  display: flex;
+}
+.container {
+  :nth-child(1) {
+    flex: none;
+  }
+  :nth-child(2) {
+    flex: 1;
+  }
+  :nth-child(3) {
+    flex: none;
+  }
+}
 
 .posts {
   display: $display;

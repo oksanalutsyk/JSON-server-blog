@@ -41,10 +41,6 @@ export class PostsComponent implements OnInit {
   }
 
   public editPost(post: Post): void {
-    console.log(post);
     this.onEdit.emit(post); //send data
-    // this.editStatus = true;
-    // this.postTitle = post.title;
-    // this.postBody = post.body;
   }
 }

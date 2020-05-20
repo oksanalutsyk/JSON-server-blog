@@ -33,7 +33,6 @@ export class PostFormComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (this.obj && changes.obj) {
       this.editObj = changes.obj.currentValue;
-      console.log(this.editObj);
       this.editPost();
     }
   }
@@ -55,10 +54,10 @@ export class PostFormComponent implements OnInit, OnChanges {
     this.postBody = formData.postBody;
 
     if (buttonType === "Add") {
-      this.isAddPost()
+      this.isAddPost();
     }
     if (buttonType === "Edit") {
-      this.saveEditChanges()
+      this.saveEditChanges();
     }
   }
 
@@ -73,7 +72,7 @@ export class PostFormComponent implements OnInit, OnChanges {
       this.getPosts();
     });
     this.editStatus = false;
-    this.form.reset()
+    this.form.reset();
   }
 
   public editPost() {
@@ -117,7 +116,7 @@ export class PostFormComponent implements OnInit, OnChanges {
       this.postService.addPost(newPost).subscribe(() => {
         this.getPosts();
       });
-      this.form.reset()
+      this.form.reset();
     }
   }
 }

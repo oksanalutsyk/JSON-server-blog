@@ -24,4 +24,7 @@ export class PostService {
   public editPost(post:Post):Observable<Post[]> {
     return this.http.put<Post[]>(`${this.url}/${post.id}`, post);
   }
+  public getPostDetails(id: number): Observable<Post> {
+    return this.http.get<Post>(`${this.url}/${id}`);
+  }
 }

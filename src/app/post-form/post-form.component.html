@@ -1,26 +1,49 @@
 <aside [ngClass]="{ aside: true }">
-    <form [ngClass]="{ postForm: true }" [formGroup]="form" (ngSubmit)="submit(buttonType)">
-      <div class="example-container">
-        <mat-form-field appearance="fill">
-          <mat-label>Post title</mat-label>
-          <input formControlName="postTitle" matInput placeholder="write here..." [(ngModel)]="postTitle" />
-        </mat-form-field>
-        <br />
-        <mat-form-field appearance="fill">
-          <mat-label>Post Text</mat-label>
-          <textarea
-            matInput
-            placeholder="write here..."
-            formControlName="postBody"
-            [(ngModel)]="postBody"
-          ></textarea>
-        </mat-form-field>
-        <button mat-raised-button color="warn" type="submit" [disabled]="form.invalid" (click)="submit('Add')" *ngIf="!editStatus">
-          Add post
-        </button>
-        <button mat-raised-button color="warn" type="submit" [disabled]="form.invalid" (click)="submit('Edit') " *ngIf="editStatus">
-          Save changes
-        </button>
-      </div>
-    </form>
-  </aside>
+  <form
+    [ngClass]="{ postForm: true }"
+    [formGroup]="form"
+    (ngSubmit)="submit(buttonType)"
+  >
+    <div class="example-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Post title</mat-label>
+        <input
+          formControlName="postTitle"
+          matInput
+          placeholder="write here..."
+          [(ngModel)]="postTitle"
+        />
+      </mat-form-field>
+      <br />
+      <mat-form-field appearance="fill">
+        <mat-label>Post Text</mat-label>
+        <textarea
+          matInput
+          placeholder="write here..."
+          formControlName="postBody"
+          [(ngModel)]="postBody"
+        ></textarea>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="warn"
+        type="submit"
+        [disabled]="form.invalid"
+        (click)="submit('Add')"
+        *ngIf="!editStatus"
+      >
+        Add post
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="submit"
+        [disabled]="form.invalid"
+        (click)="submit('Edit')"
+        *ngIf="editStatus"
+      >
+        Save changes
+      </button>
+    </div>
+  </form>
+</aside>
