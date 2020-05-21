@@ -1,13 +1,14 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from "@angular/core";
 import { PostService } from "../services/post.service";
 import { Post } from "../shared/interfaces/post.interface";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: "app-posts",
   templateUrl: "./posts.component.html",
   styleUrls: ["./posts.component.scss"],
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnDestroy {
   @Output() onEdit: EventEmitter<Post> = new EventEmitter<Post>();
   posts: Post[] = [];
   postImg: string =
@@ -16,14 +17,19 @@ export class PostsComponent implements OnInit {
   postTitle: string;
   postBody: string;
   editStatus: boolean;
+
+  private subscription: Subscription;
   constructor(private postService: PostService) {}
 
   ngOnInit() {
     this.getPosts();
+    this.postService.postsState$.subscribe(value=>{
+      this.posts = value
+    })
   }
-
+ 
   public getPosts(): void {
-    this.postService.getPosts().subscribe(
+    this.subscription = this.postService.getPosts().subscribe(
       (posts) => {
         this.posts = posts;
       },
@@ -35,12 +41,19 @@ export class PostsComponent implements OnInit {
 
   public deletePost(item: Post): void {
     const id = item.id;
-    this.postService.delPost(id).subscribe(() => {
+    this.subscription = this.postService.delPost(id).subscribe(() => {
       this.getPosts();
     });
   }
 
   public editPost(post: Post): void {
     this.onEdit.emit(post); //send data
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = null;
+    }
   }
 }

@@ -5,6 +5,7 @@ export class NewPost implements Post {
     public id: number,
     public title: string,
     public body: string,
-    public image?: string
+    public image?: string,
+    public checked?: boolean,
   ) {}
 }

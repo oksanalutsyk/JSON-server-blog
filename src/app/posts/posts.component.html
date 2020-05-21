@@ -1,7 +1,7 @@
 <mat-card
   class="example-card post"
   id="{{ post.id }}"
-  *ngFor="let post of posts; let idx = index"
+  *ngFor="let post of posts; let idx = index" 
   [ngClass]="{ postElem: true }"
 >
   <img mat-card-image [src]="postImg" alt="{{ post.title }} image" />
@@ -19,7 +19,7 @@
     >
       Click here
     </button>
-    <div [ngClass]="{ editButtons: true }">
+    <div [ngClass]="{ editButtons: true }" *ngIf="post.checked==true">
       <button
         mat-mini-fab
         color="primary"

@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatRadioModule } from "@angular/material/radio";
 import { HttpClientModule } from "@angular/common/http";
 import { PostDetailsComponent } from "./post-details/post-details.component";
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { PostDetailsComponent } from "./post-details/post-details.component";
     MatRadioModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent],
