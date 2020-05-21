@@ -42,4 +42,8 @@ export class PostService {
   public getPostDetails(id: number): Observable<Post> {
     return this.http.get<Post>(`${this.url}/${id}`);
   }
+
+  public editPosts(posts:Array<Post>): Observable<Post[]> {
+    return this.http.put<Post[]>(`${this.url}`, posts);
+  }
 }

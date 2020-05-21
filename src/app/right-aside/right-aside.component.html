@@ -1,22 +1,24 @@
 <aside [ngClass]="{ aside: true }">
-  <div [ngClass]="{ list: true }">
-    <button mat-stroked-button color="warn">Reset</button>
+  <form [ngClass]="{ list: true }" [formGroup]="form" type="submit" (ngSubmit)="submit(posts)">
+    <button mat-stroked-button color="warn" type="submit">Reset</button>
     <mat-radio-group
       aria-label="Select an option"
       [ngClass]="{ radios: true }"
       [(ngModel)]="selected"
+      formControlName="radioButton"
     >
       <mat-radio-button
         *ngFor="let item of posts"
         id="{{ item.id }}"
         value="{{ item.id }}"
-        (change)="radioChange($event, item.id)"
+        (change)="radioChange($event, item.id) "
         [checked]="item.checked"
+        
       >
         <label for="" [ngClass]="{ radioLabel: true }">{{
           item.title
         }}</label></mat-radio-button
       >
     </mat-radio-group>
-  </div>
+  </form>
 </aside>

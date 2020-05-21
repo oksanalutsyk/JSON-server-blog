@@ -1,1 +1,15 @@
-<p>{{view?.title}}</p>
+<mat-card [ngClass]="{ postDetails: true }">
+  <div>
+    <img
+      mat-card-image
+      [src]="postImg"
+      alt="Photo of a Shiba Inu"
+      [routerLink]="['/posts']"
+      [ngClass]="{ img: true }"
+    />
+  </div>
+  <div>
+    <h2>{{ view?.title }}</h2>
+    <h4>{{ view?.body }}</h4>
+  </div>
+</mat-card>

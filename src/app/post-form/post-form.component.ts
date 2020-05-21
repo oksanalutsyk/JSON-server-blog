@@ -60,8 +60,6 @@ export class PostFormComponent implements OnInit, OnChanges {
     this.subscription = this.postService.getPosts().subscribe(
       (posts) => {
         this.postService.setNewSubjectValue(posts)
-
-        console.log(posts);
       },
       (err) => {
         console.error(err);
@@ -89,7 +87,8 @@ export class PostFormComponent implements OnInit, OnChanges {
       this.editId,
       this.postTitle,
       this.postBody,
-      this.postImg
+      this.postImg,
+      this.postChecked = false
     );
     this.postService.editPost(newPost).subscribe();
     this.editStatus = false;
@@ -125,7 +124,8 @@ export class PostFormComponent implements OnInit, OnChanges {
       this.getPosts();
       console.log(this.posts);
       this.subscription = this.postService.addPost(newPost).subscribe();
-      this.form.reset();
     }
+    this.form.reset();
+
   }
 }

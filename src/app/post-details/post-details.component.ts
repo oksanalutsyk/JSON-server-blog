@@ -11,7 +11,8 @@ import { Post } from "../shared/interfaces/post.interface";
 export class PostDetailsComponent implements OnInit {
   postId: number;
   view: Post;
-
+  postImg: string =
+  "https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/21_Angular-512.png";
   constructor(
     private postService: PostService,
     private route: ActivatedRoute
